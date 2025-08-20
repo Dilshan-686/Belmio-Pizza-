@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* App.css or the relevant stylesheet */
+body {
+  margin: 0;
+}
+
+.slogan, .navbar {
+  margin: 0; /* Ensure there's no margin between them */
+}
