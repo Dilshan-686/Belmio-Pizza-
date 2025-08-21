@@ -14,7 +14,6 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
     },
     cartData: {
       type: Object,
@@ -24,6 +23,7 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+      profileImage: { type: String }
   },
   { minimize: false } // Keep empty objects
 );
