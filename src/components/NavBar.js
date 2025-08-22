@@ -30,15 +30,26 @@ const Navbar = ({ setShowLogin, setFormType }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const [profileImage, setProfileImage] = useState("");
+  // const [profileImage, setProfileImage] = useState("");
+  //
+  // useEffect(() => {
+  //   if (user && user.profileImage) {
+  //     setProfileImage(user.profileImage);
+  //   } else {
+  //     // fallback to localStorage
+  //     const savedImage = localStorage.getItem("profileImage");
+  //     if (savedImage) setProfileImage(savedImage);
+  //   }
+  // }, [user]);
+
+  const [profileImage, setProfileImage] = useState("default-profile.png");
 
   useEffect(() => {
-    if (user && user.profileImage) {
+    if (user?.profileImage) {
       setProfileImage(user.profileImage);
     } else {
-      // fallback to localStorage
-      const savedImage = localStorage.getItem("profileImage");
-      if (savedImage) setProfileImage(savedImage);
+      const saved = localStorage.getItem("profileImage");
+      if (saved) setProfileImage(saved);
     }
   }, [user]);
 
@@ -208,7 +219,9 @@ const Navbar = ({ setShowLogin, setFormType }) => {
                         {isAdmin && (
                             <button onClick={() => { navigate('/admin/dashboard'); setIsMenuOpen(false); }} className="text-white border px-4 py-2 rounded hover:bg-white hover:text-orange-600">Dashboard</button>
                         )}
-                        <img src={user.profileImage || "default-profile.png"} alt="Profile" className="w-10 h-10 rounded-full border-2 border-white object-cover"/>
+                        <img src={profileImage || "default-profile.png"}
+                             alt="Profile"
+                             className="w-10 h-10 rounded-full border-2 border-white object-cover"/>
                         <button onClick={() => { logOut(); setIsMenuOpen(false); }} className="text-white border px-4 py-2 rounded hover:bg-white hover:text-orange-600">LOG OUT</button>
                       </div>
                   )}
