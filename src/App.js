@@ -28,6 +28,7 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import CheckoutSuccess from "./components/CheckoutSuccess";
 import CheckoutCancel from "./components/CheckoutCancel";
+import OauthSuccess from "./Services/OauthSuccess";
 
 
 
@@ -96,7 +97,8 @@ const AppWithLoading = () => {
         <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/checkout/success" element={<CheckoutSuccess />} />
-        <Route path="/checkout/cancel" element={<CheckoutCancel />} />  
+        <Route path="/checkout/cancel" element={<CheckoutCancel />} />
+        <Route path="/oauth-success" element={<OauthSuccess />}/>
         <Route path="*" element={<div>Page Not Found</div>} />
       </Routes>
 
