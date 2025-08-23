@@ -30,6 +30,8 @@ const Navbar = ({ setShowLogin, setFormType }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+
+  //Test 01
   // const [profileImage, setProfileImage] = useState("");
   //
   // useEffect(() => {
@@ -42,16 +44,48 @@ const Navbar = ({ setShowLogin, setFormType }) => {
   //   }
   // }, [user]);
 
-  const [profileImage, setProfileImage] = useState("default-profile.png");
+  // const [profileImage, setProfileImage] = useState("default-profile.png");
 
-  useEffect(() => {
-    if (user?.profileImage) {
-      setProfileImage(user.profileImage);
-    } else {
-      const saved = localStorage.getItem("profileImage");
-      if (saved) setProfileImage(saved);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user?.profileImage) {
+  //     setProfileImage(user.profileImage);
+  //   } else {
+  //     const saved = localStorage.getItem("profileImage");
+  //     if (saved) setProfileImage(saved);
+  //   }
+  // }, [user]);
+
+  // console.log(localStorage.getItem("profileImage"));
+
+  // const [profileImage, setProfileImage] = useState("default-profile.png");
+
+  // useEffect(() => {
+  //   const saved = localStorage.getItem("profileImage");
+
+  //   if (user?.profileImage) {
+  //     setProfileImage(user.profileImage);
+  //   } else if (saved) {
+  //     setProfileImage(saved);
+  //   }
+  // }, [user]);
+//
+const [profileImage, setProfileImage] = useState("default-profile.png");
+
+useEffect(() => {
+  if (user?.profileImage) {
+    // ✅ Save to state and localStorage
+    setProfileImage(user.profileImage);
+    localStorage.setItem("profileImage", user.profileImage);
+  } else {
+    // ✅ Fallback to whatever is in localStorage
+    const saved = localStorage.getItem("profileImage");
+    if (saved) setProfileImage(saved);
+  }
+}, [user]);
+
+
+
+
 
   const logOut = () => {
     localStorage.removeItem("token");
@@ -179,7 +213,8 @@ const Navbar = ({ setShowLogin, setFormType }) => {
                             </button>
                         )}
                         <img
-                            src={profileImage || "default-profile.png"}
+                            src={user.profileImage || "default-profile.png"}
+                            loading="lazy"
                             alt="Profile"
                             className="w-10 h-10 rounded-full border-2 border-white object-cover"
                         />
@@ -219,8 +254,9 @@ const Navbar = ({ setShowLogin, setFormType }) => {
                         {isAdmin && (
                             <button onClick={() => { navigate('/admin/dashboard'); setIsMenuOpen(false); }} className="text-white border px-4 py-2 rounded hover:bg-white hover:text-orange-600">Dashboard</button>
                         )}
-                        <img src={profileImage || "default-profile.png"}
+                        <img src={user.profileImage || "default-profile.png"}
                              alt="Profile"
+                             loading="lazy"
                              className="w-10 h-10 rounded-full border-2 border-white object-cover"/>
                         <button onClick={() => { logOut(); setIsMenuOpen(false); }} className="text-white border px-4 py-2 rounded hover:bg-white hover:text-orange-600">LOG OUT</button>
                       </div>
